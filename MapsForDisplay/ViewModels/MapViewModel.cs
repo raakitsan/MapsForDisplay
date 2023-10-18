@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
@@ -10,18 +11,27 @@ namespace MapsForDisplay.ViewModels;
 /// <summary>
 /// Provides map data to an application
 /// </summary>
-public class MapViewModel : INotifyPropertyChanged
+
+public partial class MapViewModel
+   // public class MapViewModel : INotifyPropertyChanged
 {
-    public MapViewModel()
+
+   public MapViewModel()
     {
         _map = new Map(SpatialReferences.WebMercator)
         {
             InitialViewpoint = new Viewpoint(new Envelope(-180, -85, 180, 85, SpatialReferences.Wgs84)),
             Basemap = new Basemap(BasemapStyle.ArcGISStreets)
         };
-    }
+      // from SetPresPosPage.cs
+      //WeakReferenceMessenger.Default.Register<LatLonCoordsMessage>(this, HandleLatLonCoordsMessage);
+   }
+   //private async void HandleLatLonCoordsMessage(object recipient, LatLonCoordsMessage message)
+   //{
+   //   coords = message.Value;
+   //}
 
-    private Map _map;
+   private Map _map;
 
     /// <summary>
     /// Gets or sets the map
@@ -41,10 +51,12 @@ public class MapViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler PropertyChanged;
 
+   // button on MainPage.xaml clicked
    public Command OpenWindowCommand
    {
       get
       {
+         // to MainPage.xaml.cs
          return new Command(() => {
             WeakReferenceMessenger.Default.Send(new OpenWindowMessage(true));
          });

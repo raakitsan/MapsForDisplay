@@ -21,5 +21,6 @@
         <Label
             Margin="10,30,10,0"
             Text="{Binding Coord}" />
-    </VerticalStackLayout>
+        <Entry  x:Name="mEntry" IsReadOnly="True"  Text="37 53 27.6 N 74 52 19.2 W" />
+   </VerticalStackLayout>
 </ContentPage>

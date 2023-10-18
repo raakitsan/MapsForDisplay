@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
 using MapsForDisplay.ViewModels;
 using MapsForDisplay.Views;
 
@@ -6,19 +7,22 @@ namespace MapsForDisplay;
 
 public partial class MainPage : ContentPage
 {
+   public string Coords = "";
    private MapViewModel WindowViewModel
    {
       get;
       set;
    }
    public MainPage()
-    {
+   {
       InitializeComponent();
       WindowViewModel = new MapViewModel();
-      WeakReferenceMessenger.Default.Register<OpenWindowMessage>(this, HandleOpenWindowMessage);
       BindingContext = WindowViewModel;
-      //this.BindingContext = new MapViewModel();
+
+      // from MapViewModel.cs and SetPresPosPage.cs
+      WeakReferenceMessenger.Default.Register<OpenWindowMessage>(this, HandleOpenWindowMessage);
    }
+
    private async void HandleOpenWindowMessage(object recipient, OpenWindowMessage message)
    {
       switch (message.Value)

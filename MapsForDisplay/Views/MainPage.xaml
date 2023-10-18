@@ -5,12 +5,15 @@
              x:Class="MapsForDisplay.MainPage">
 
     <Grid>
-         <esri:MapView x:Name="mapView" Map="{Binding Map}" />
+        <esri:MapView x:Name="mapView" Map="{Binding Map}" />
         <Button
-                x:Name="OpenWindowBtn"
-                Text="Go Somewhere"
-                Command="{Binding OpenWindowCommand}"
-                HorizontalOptions="Center"
-                VerticalOptions="Start"/>
+            x:Name="OpenWindowBtn"
+            Text="Go Somewhere"
+            Command="{Binding OpenWindowCommand}"
+            HorizontalOptions="Center"
+            VerticalOptions="Start"/>
+      <Label
+         Text="Get Lat Lon here someday">
+      </Label>
     </Grid>
 </ContentPage>
