@@ -2,8 +2,9 @@
 
 namespace MapsForDisplay
 {
-   public class LatLonCoordsMessage : ValueChangedMessage<string>
+   public partial class LatLonCoordsMessage : ValueChangedMessage<string>
    {
       public LatLonCoordsMessage(string value) : base(value) { }
+
    }
 }

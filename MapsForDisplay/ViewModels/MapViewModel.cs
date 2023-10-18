@@ -12,8 +12,7 @@ namespace MapsForDisplay.ViewModels;
 /// Provides map data to an application
 /// </summary>
 
-public partial class MapViewModel
-   // public class MapViewModel : INotifyPropertyChanged
+public partial class MapViewModel : INotifyPropertyChanged
 {
 
    public MapViewModel()

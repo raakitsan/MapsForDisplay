@@ -7,7 +7,6 @@ namespace MapsForDisplay;
 
 public partial class MainPage : ContentPage
 {
-   public string Coords = "";
    private MapViewModel WindowViewModel
    {
       get;
@@ -19,8 +18,17 @@ public partial class MainPage : ContentPage
       WindowViewModel = new MapViewModel();
       BindingContext = WindowViewModel;
 
+      // SetPresPosPage.cs
+      WeakReferenceMessenger.Default.Register<LatLonCoordsMessage>(this, HandleLatLonCoordsMessage);
+
       // from MapViewModel.cs and SetPresPosPage.cs
       WeakReferenceMessenger.Default.Register<OpenWindowMessage>(this, HandleOpenWindowMessage);
+
+   }
+   public string crds = "";
+   private void HandleLatLonCoordsMessage(object recipient, LatLonCoordsMessage message)
+   {
+      crds = message.Value;
    }
 
    private async void HandleOpenWindowMessage(object recipient, OpenWindowMessage message)
@@ -31,7 +39,7 @@ public partial class MainPage : ContentPage
             await Navigation.PushAsync(new SetPresPosPage());
             break;
          default:
-            await DisplayAlert("Alert", "Secondary window was closed", "OK");
+            await DisplayAlert("Alert", crds, "OK");
             break;
       }
    }
