@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:esri="http://schemas.esri.com/arcgis/runtime/2013"
+             x:Class="MapsForDisplay.MainPage">
+
+    <Grid>
+         <esri:MapView x:Name="mapView" Map="{Binding Map}" />
+        <Button
+                x:Name="OpenWindowBtn"
+                Text="Go Somewhere"
+                Command="{Binding OpenWindowCommand}"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"/>
+    </Grid>
+</ContentPage>
