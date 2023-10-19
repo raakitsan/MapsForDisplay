@@ -17,7 +17,7 @@ public partial class SetPresPosPage : ContentPage
       // to MainPage.xaml.cs
       base.OnDisappearing();
 
-      WeakReferenceMessenger.Default.Send(new LatLonCoordsMessage("37 53 27.6 N 74 52 19.2 W"));
+      WeakReferenceMessenger.Default.Send(new LatLonCoordsMessage(SetPresPosViewModel.coord));
       WeakReferenceMessenger.Default.Send(new OpenWindowMessage(false));
       
       // below is kind of optional here, as we're not really handling messages on this page.
