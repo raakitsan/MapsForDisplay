@@ -11,6 +11,6 @@ namespace MapsForDisplay.ViewModels
    internal partial class SetPresPosViewModel
    {
       [ObservableProperty]
-      private string coord;
+      public static string coord;
    }
 }
