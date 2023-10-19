@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using CoordinateSharp;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Map = Esri.ArcGISRuntime.Mapping.Map;
@@ -15,7 +16,7 @@ namespace MapsForDisplay.ViewModels;
 public partial class MapViewModel
 {
    [ObservableProperty]
-   private string crds = "should have changed to Lat Lon";
+   private string crds = "should be changing to Lat Lon";
    public MapViewModel()
     {
         _map = new Map(SpatialReferences.WebMercator)
@@ -26,10 +27,11 @@ public partial class MapViewModel
       // from SetPresPosPage.xaml.cs
       WeakReferenceMessenger.Default.Register<LatLonCoordsMessage>(this, HandleLatLonCoordsMessage);
    }
-   public string ts = "";
    private async void HandleLatLonCoordsMessage(object recipient, LatLonCoordsMessage message)
    {
-      Crds = message.Value;
+      string theCrds = message.Value;
+      Coordinate c = Coordinate.Parse(theCrds);
+      Crds = $"{c.WebMercator.Easting} and {c.WebMercator.Northing}";
    }
 
    private Map _map;
