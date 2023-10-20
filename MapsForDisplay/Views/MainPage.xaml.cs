@@ -27,9 +27,6 @@ public partial class MainPage : ContentPage
       WeakReferenceMessenger.Default.Register<LatLonCoordsMessage>(this, HandleLatLonCoordsMessage);
    }
 
-   //private MapPoint NewCoords = new MapPoint(
-   //-13881.7678417696, 6710726.57374296, SpatialReferences.WebMercator);
-
    private async void HandleLatLonCoordsMessage(object recipient, LatLonCoordsMessage message)
    {
       string theCrds = message.Value;
