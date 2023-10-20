@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using CoordinateSharp;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Map = Esri.ArcGISRuntime.Mapping.Map;
@@ -16,7 +17,7 @@ namespace MapsForDisplay.ViewModels;
 public partial class MapViewModel
 {
    [ObservableProperty]
-   private string crds = "should have changed to Lat Lon";
+   private string crds = "should be changing to Lat Lon";
    public MapViewModel()
     {
         _map = new Map(SpatialReferences.WebMercator)
