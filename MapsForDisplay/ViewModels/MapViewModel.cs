@@ -32,8 +32,15 @@ public partial class MapViewModel
    private async void HandleLatLonCoordsMessage(object recipient, LatLonCoordsMessage message)
    {
       string theCrds = message.Value;
-      Coordinate c = Coordinate.Parse(theCrds);
-      Crds = $"{c.WebMercator.Easting} and {c.WebMercator.Northing}";
+      try
+      {
+         Coordinate c = Coordinate.Parse(theCrds);
+         Crds = $"{c.WebMercator.Easting} and {c.WebMercator.Northing}";
+      }
+      catch (System.FormatException ex)
+      {
+         Crds = ex.Message;
+      }
    }
 
    private Map _map;

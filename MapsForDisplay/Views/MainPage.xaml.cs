@@ -29,6 +29,8 @@ public partial class MainPage : ContentPage
 
    private async void HandleLatLonCoordsMessage(object recipient, LatLonCoordsMessage message)
    {
+      try
+      {
       string theCrds = message.Value;
       Coordinate c = Coordinate.Parse(theCrds);
 
@@ -40,6 +42,8 @@ public partial class MainPage : ContentPage
 
       // Set the Viewpoint scale to match the specified scale
       await mapView.SetViewpointScaleAsync(10000000);
+      }
+      catch(Exception ex) { }
    }
 
    private async void HandleOpenWindowMessage(object recipient, OpenWindowMessage message)
