@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Messaging;
+using CoordinateSharp;
+using Esri.ArcGISRuntime.Geometry;
 using MapsForDisplay.ViewModels;
 using MapsForDisplay.Views;
 
@@ -21,6 +23,26 @@ public partial class MainPage : ContentPage
       // from MapViewModel.cs and SetPresPosPage.cs
       WeakReferenceMessenger.Default.Register<OpenWindowMessage>(this, HandleOpenWindowMessage);
 
+      // from SetPresPosPage.xaml.cs
+      WeakReferenceMessenger.Default.Register<LatLonCoordsMessage>(this, HandleLatLonCoordsMessage);
+   }
+
+   //private MapPoint NewCoords = new MapPoint(
+   //-13881.7678417696, 6710726.57374296, SpatialReferences.WebMercator);
+
+   private async void HandleLatLonCoordsMessage(object recipient, LatLonCoordsMessage message)
+   {
+      string theCrds = message.Value;
+      Coordinate c = Coordinate.Parse(theCrds);
+
+      MapPoint NewCoords = new MapPoint(
+         c.WebMercator.Easting, c.WebMercator.Northing, SpatialReferences.WebMercator);
+
+      // Set Viewpoint so that it is centered on the London coordinates defined above
+      await mapView.SetViewpointCenterAsync(NewCoords);
+
+      // Set the Viewpoint scale to match the specified scale
+      await mapView.SetViewpointScaleAsync(10000000);
    }
 
    private async void HandleOpenWindowMessage(object recipient, OpenWindowMessage message)

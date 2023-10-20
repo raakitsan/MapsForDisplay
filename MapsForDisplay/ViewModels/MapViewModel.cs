@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Messaging;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Map = Esri.ArcGISRuntime.Mapping.Map;
+using CoordinateSharp;
 
 namespace MapsForDisplay.ViewModels;
 
@@ -23,13 +24,15 @@ public partial class MapViewModel
             InitialViewpoint = new Viewpoint(new Envelope(-180, -85, 180, 85, SpatialReferences.Wgs84)),
             Basemap = new Basemap(BasemapStyle.ArcGISStreets)
         };
+
       // from SetPresPosPage.xaml.cs
       WeakReferenceMessenger.Default.Register<LatLonCoordsMessage>(this, HandleLatLonCoordsMessage);
    }
-   public string ts = "";
    private async void HandleLatLonCoordsMessage(object recipient, LatLonCoordsMessage message)
    {
-      Crds = message.Value;
+      string theCrds = message.Value;
+      Coordinate c = Coordinate.Parse(theCrds);
+      Crds = $"{c.WebMercator.Easting} and {c.WebMercator.Northing}";
    }
 
    private Map _map;

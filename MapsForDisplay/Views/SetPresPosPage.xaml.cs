@@ -14,7 +14,7 @@ public partial class SetPresPosPage : ContentPage
    // when page closes
    protected override void OnDisappearing()
    {
-      // to MainPage.xaml.cs
+      // to MainPage.xaml.cs and MapViewModel.cs
       base.OnDisappearing();
 
       WeakReferenceMessenger.Default.Send(new LatLonCoordsMessage(SetPresPosViewModel.coord));

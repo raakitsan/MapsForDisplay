@@ -30,6 +30,7 @@
 	<ItemGroup>
 		<Using Include="Esri.ArcGISRuntime.Maui" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+		<PackageReference Include="CoordinateSharp" Version="2.20.1.1" />
 		<PackageReference Include="Esri.ArcGISRuntime.Maui" Version="200.2.0" />
 	</ItemGroup>
   
